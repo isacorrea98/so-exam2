@@ -2,8 +2,12 @@
 **Universidad ICESI**  
 **Curso:** Sistemas Operativos  
 **Docente:** Daniel Barragán C.  
-**Tema:** Namespaces, CGroups, LXC
-**Correo:** daniel.barragan at correo.icesi.edu.co
+**Tema:** Namespaces, CGroups, LXC  
+**Correo:** daniel.barragan@correo.icesi.edu.co  
+  
+**Estudiante:** Óscar Daniel Molano Torres  
+**Código:** A00267576  
+**Correo:** oscar.molano@correo.icesi.edu.co  
 
 ### Objetivos
 * Comprender los fundamentos que dan origen a las tecnologías de contenedores virtuales
