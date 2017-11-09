@@ -61,7 +61,7 @@ El segundo parcial del curso sistemas operativos trata sobre el manejo de namesp
  
  * Cuando uno de los procesos se cancela, el que continua ejecutándose no debe acceder a mas del 50% de la CPU  
    
- Finalmente, se detuvo el proceso1.service y se pudo observar que el proceso2.service no accedia a más que el 50% de la CPU gracias a la configuración preivia:  
+ Finalmente, se detuvo el proceso1.service y se pudo observar que el proceso2.service no podía acceder a más que el 50% de la CPU gracias a la configuración previa:  
    
  ![][8]  
    
@@ -86,7 +86,7 @@ El segundo parcial del curso sistemas operativos trata sobre el manejo de namesp
  
  * Cuando uno de los procesos se cancela, el que continua ejecutándose debe poder llegar al 100% de la CPU  
    
- Para lograr esto se creó un script que fue capaz de reconfigurar el proceso2.service ya que se decidió que el proceso1.service era el proceso que se detendría. Adicionalmente este script era ejecutado automaticamente después de ejecutar la acción stop, por medio del parámetro *ExceStop* que se activa cuando reconoce la ejecución de este comando.  
+ Para lograr esto se creó un script que fue capaz de reconfigurar el proceso2.service ya que se decidió que el proceso1.service era el proceso que se detendría. Adicionalmente, este script era ejecutado automaticamente después de ejecutar la acción stop, por medio del parámetro *ExceStop* que se activa cuando reconoce la ejecución de este comando.  
  
  Script  
  ![][11]  
@@ -94,11 +94,34 @@ El segundo parcial del curso sistemas operativos trata sobre el manejo de namesp
  Configuración ExceStop  
  ![][12]  
  
-5. Por medio de las evidencias obtenidas en los puntos anteriores y de fuentes de consulta en Internet, elabore las definiciones para los grupos de control CPUQuota y CPUShares, además concluya acerca de cuando es preferible usar un recurso de control sobre otro (20%)
+5. Por medio de las evidencias obtenidas en los puntos anteriores y de fuentes de consulta en Internet, elabore las definiciones para los grupos de control CPUQuota y CPUShares, además concluya acerca de cuando es preferible usar un recurso de control sobre otro (20%)  
+  
+**CPUQuota:** Esta función permite asignarle a un proceso especifico una cuota de tiempo de uso de la CPU expresada en porcentaje. Donde el porcentaje expecifica un limite el cual la CPU no debe superar.  
+  
+**Ejemplo:**  
+CPUQuota=75% Donde se garantiza que el proceso no va a superar el 75% del tiempo de uso de la CPU.  
+  
+**CPUShare:** Permite la asignación de una proporción de CPU a un proceso mediante bites que hacen referencia a un procentaje del total de CPU a dispocisión.  
+  
+**Ejemplo:**  
+Proceso1 ->CPUShare=2560  
+Proceso2 ->CPUShare=7680  
+  
+Con el ejemplo podemos deducir que Proceso1 va a obtener 25% del total de la CPU mientras que Proceso2 va a tener a su dispocisión 75% de CPU.  
+  
+Si agregamos Proceso3 ->CPUShare=2560    
+Podemos deducir que Proceso1 y Proceso3 obtedran a su disposición 20% de los recursos y Proceso2 el 60%.  
+  
+  
+El CPUQuota se debe usar cuando quiero que los procesos utilicen la CPU en mayor o menor proporción que otros procesos; y el CPUShares me permite dividir la CPU total en particiones y ser asignadas a los procesos que necesito ignorando el tiempo de uso de estas particiones.  
+     
 6. El informe debe ser entregado en formato pdf a través del moodle y el informe en formato README.md debe ser subido a un repositorio de github. El repositorio de github debe ser un fork de https://github.com/ICESI-Training/so-exam2 y para la entrega deberá hacer un Pull Request (PR) respetando la estructura definida. El código fuente y la url de github deben incluirse en el informe (10%)  
 
 ### Referencias
-https://github.com/ICESI/so-containers
+https://github.com/ICESI/so-containers  
+https://www.freedesktop.org/software/systemd/man/systemd.resource-control.html  
+https://docs.docker.com/engine/reference/run/#cpu-share-constraint  
+
 
 [1]: imagenes/nucleo.jpg  
 [2]: imagenes/test1sh.JPG  
